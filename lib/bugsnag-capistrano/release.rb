@@ -11,16 +11,6 @@ module Bugsnag
       DEFAULT_BUILD_TOOL_NAME = "bugsnag-capistrano"
 
       def self.notify(opts = {})
-        # Try and get some config from Bugsnag
-        begin
-          require 'bugsnag'
-
-          opts[:api_key] ||= Bugsnag.configuration.api_key
-          opts[:app_version] ||= Bugsnag.configuration.app_version
-          opts[:release_stage] ||= Bugsnag.configuration.release_stage
-        rescue LoadError
-        end
-
         opts[:endpoint] ||= DEFAULT_BUILD_ENDPOINT
         opts[:builder_name] ||= `whoami`
         opts[:build_tool] ||= DEFAULT_BUILD_TOOL_NAME
